@@ -72,7 +72,7 @@ class GoogleMLKit {
 
         textRecognizer.process(InputImage.fromBitmap(imageWrapper.bitmap, 0))
             .addOnSuccessListener { result ->
-                Log.d(TAG, "ocr: success")
+//                Log.d(TAG, "ocr: success")
                 ocrResults = result.mapToOcrResults()
             }
             .addOnFailureListener { e ->
@@ -94,7 +94,7 @@ class GoogleMLKit {
 
         textRecognizer.process(InputImage.fromBitmap(imageWrapper.bitmap, 0))
             .addOnSuccessListener { result ->
-                Log.d(TAG, "ocrText: success")
+//                Log.d(TAG, "ocrText: success")
                 ocrResults = result.text
             }
             .addOnFailureListener { e ->
