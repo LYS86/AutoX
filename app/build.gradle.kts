@@ -97,6 +97,7 @@ android {
     }
     buildTypes {
         named("debug") {
+            applicationIdSuffix = ".debug"
             isShrinkResources = false
             isMinifyEnabled = false
             setProguardFiles(
