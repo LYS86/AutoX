@@ -114,9 +114,6 @@ public class EditorMenu {
 
     private boolean onMoreOptionsSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_console:
-                showConsole();
-                return true;
             case R.id.action_import_java_class:
                 importJavaPackageOrClass();
                 return true;
@@ -289,10 +286,6 @@ public class EditorMenu {
 
     private void showLog() {
         LogActivityKt.start(mContext);
-    }
-
-    private void showConsole() {
-        mEditorView.showConsole();
     }
 
     private void forceStop() {

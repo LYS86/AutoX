@@ -116,11 +116,6 @@
     <item android:title="@string/text_more">
         <menu>
             <item
-                android:id="@+id/action_console"
-                android:title="@string/text_console"
-                app:showAsAction="never" />
-
-            <item
                 android:id="@+id/action_import_java_class"
                 android:title="@string/text_search_java_class"
                 app:showAsAction="never" />

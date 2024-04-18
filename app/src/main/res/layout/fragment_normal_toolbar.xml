@@ -40,22 +40,14 @@
         app:text="@string/text_save"/>
 
     <org.autojs.autojs.ui.widget.ToolbarMenuItem
-        android:id="@+id/textSizePlus"
+        android:id="@+id/beautify"
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:enabled="false"
         app:icon="@drawable/ic_edit_white_24dp"
         app:icon_color="@color/toolbar"
-        app:text="@string/textSizePlus"/>
+        app:text="@string/text_code_beautify"/>
 
-    <org.autojs.autojs.ui.widget.ToolbarMenuItem
-        android:id="@+id/textSizeMinus"
-        android:layout_width="40dp"
-        android:layout_height="match_parent"
-        android:enabled="false"
-        app:icon="@drawable/ic_edit_white_24dp"
-        app:icon_color="@color/toolbar"
-        app:text="@string/textSizeMinus"/>
 
 
 </LinearLayout>
