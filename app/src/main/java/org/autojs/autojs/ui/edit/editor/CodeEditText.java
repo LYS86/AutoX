@@ -285,7 +285,12 @@ public class CodeEditText extends AppCompatEditText {
                 //postInvalidate();
                 return;
             }
-            canvas.drawText(text, previousColorPos, visibleCharEnd, paddingLeft + offsetX, lineBaseline, paint);
+            try {
+                canvas.drawText(text, previousColorPos, visibleCharEnd, paddingLeft + offsetX, lineBaseline, paint);
+            } catch (Exception e) {
+                Log.e(LOG_TAG, String.format("drawText: %s\nPreviousColorPos: %d\nVisibleCharEnd: %d\nX Position: %s\nY Position: %d\nlineStart = %d, lineEnd = %d, visibleCharStart = %d, visibleCharEnd = %d", e, previousColorPos, visibleCharEnd, paddingLeft + offsetX, lineBaseline, lineStart, lineEnd, visibleCharStart, visibleCharEnd));
+                return;
+            }
             if (DEBUG) {
                 mLogger.addSplit("draw line " + line + " (" + (visibleCharEnd - visibleCharStart) + ") ");
             }
@@ -438,7 +443,7 @@ public class CodeEditText extends AppCompatEditText {
             return;
         }
         mHighlightTokens = highlightTokens;
-        Log.d(LOG_TAG, "updateHighlightTokens: tokens = " + highlightTokens);
+//        Log.d(LOG_TAG, "updateHighlightTokens: tokens = " + highlightTokens);
         postInvalidate();
     }
 
