@@ -449,9 +449,6 @@
             android:configChanges="orientation|screenSize" />
         <activity android:name="org.autojs.autojs.ui.edit.ViewSampleActivity" />
         <activity
-            android:name="org.autojs.autojs.ui.user.LoginActivity_"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name="org.autojs.autojs.ui.user.RegisterActivity_"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="org.autojs.autojs.ui.user.WebActivity_" />
@@ -478,15 +475,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="org.autojs.autojs.ui.error.IssueReporterActivity"
-            android:theme="@style/IssueReporterTheme" />
-
         <service android:name="org.autojs.autojs.external.foreground.ForegroundService" />
         <service android:name="org.autojs.autojs.external.ScriptExecutionIntentService" />
 
         <activity android:name="org.autojs.autojs.external.tasker.TaskPrefEditActivity_" />
-        <activity android:name="org.autojs.autojs.ui.log.LogActivity_"/>
         <activity-alias
             android:name=".external.tasker.PluginActivity"
             android:exported="true"
