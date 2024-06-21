@@ -123,12 +123,13 @@ public class ShortcutCreateActivity extends AppCompatActivity {
                 .putExtra(ScriptIntents.EXTRA_KEY_PATH, mScriptFile.getPath())
                 .setAction(Intent.ACTION_MAIN);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ShortcutManager.getInstance(this).addPinnedShortcut(mName.getText(), mScriptFile.getPath(), icon, intent);
+        String shortcutId = mName.getText().toString();
+        ShortcutManager shortcutManager = ShortcutManager.getInstance(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && shortcutManager.isRequestPinShortcutSupported()) {
+            shortcutManager.addPinnedShortcut(mName.getText(), shortcutId, icon, intent);
         } else {
-            ShortcutManager.getInstance(this).addDynamicShortcut(mName.getText(), mScriptFile.getPath(), icon, intent);
+            shortcutManager.addDynamicShortcut(mName.getText(), shortcutId, icon, intent);
         }
-
     }
 
 

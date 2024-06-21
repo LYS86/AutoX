@@ -12,31 +12,35 @@ import androidx.annotation.RequiresApi;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Stardust on 2017/10/25.
- */
-
 @RequiresApi(api = Build.VERSION_CODES.N_MR1)
 public class ShortcutManager {
 
-
-    private static ShortcutManager sInstance;
+    private static volatile ShortcutManager sInstance;
     private Context mContext;
     private android.content.pm.ShortcutManager mShortcutManager;
 
-
-    public ShortcutManager(Context context) {
-        mContext = context;
+    private ShortcutManager(Context context) {
+        mContext = context.getApplicationContext();
         mShortcutManager = (android.content.pm.ShortcutManager) context.getSystemService(Context.SHORTCUT_SERVICE);
     }
 
     public static ShortcutManager getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new ShortcutManager(context);
+            synchronized (ShortcutManager.class) {
+                if (sInstance == null) {
+                    sInstance = new ShortcutManager(context);
+                }
+            }
         }
         return sInstance;
     }
 
+    public boolean isRequestPinShortcutSupported() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return mShortcutManager.isRequestPinShortcutSupported();
+        }
+        return false;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addPinnedShortcut(CharSequence label, String id, Icon icon, Intent intent) {
@@ -46,7 +50,7 @@ public class ShortcutManager {
         ShortcutInfo shortcut = buildShortcutInfo(label, id, icon, intent);
         int req = getRequestCode(id);
         PendingIntent successCallback = PendingIntent.getBroadcast(mContext, req,
-                mShortcutManager.createShortcutResultIntent(shortcut), 0);
+                mShortcutManager.createShortcutResultIntent(shortcut), PendingIntent.FLAG_UPDATE_CURRENT);
         mShortcutManager.requestPinShortcut(shortcut, successCallback.getIntentSender());
     }
 
@@ -77,12 +81,13 @@ public class ShortcutManager {
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     private void removeTheFirstShortcut() {
         List<ShortcutInfo> dynamicShortcuts = mShortcutManager.getDynamicShortcuts();
-        mShortcutManager.removeDynamicShortcuts(Collections.singletonList(dynamicShortcuts.get(0).getId()));
+        if (!dynamicShortcuts.isEmpty()) {
+            mShortcutManager.removeDynamicShortcuts(Collections.singletonList(dynamicShortcuts.get(0).getId()));
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     private void addDynamicShortcutUnchecked(ShortcutInfo shortcut) {
         mShortcutManager.addDynamicShortcuts(Collections.singletonList(shortcut));
     }
-
 }
