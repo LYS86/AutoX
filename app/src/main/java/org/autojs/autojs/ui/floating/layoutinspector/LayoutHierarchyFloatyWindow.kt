@@ -175,7 +175,8 @@ open class LayoutHierarchyFloatyWindow(private val mRootNode: NodeInfo) : FullSc
             mContext, Arrays.asList(
                 mContext!!.getString(R.string.text_show_widget_infomation),
                 mContext!!.getString(R.string.text_show_layout_bounds),
-                mContext!!.getString(R.string.text_generate_code)
+                mContext!!.getString(R.string.text_generate_code),
+                mContext!!.getString(R.string.text_copy_widget_info),
             )
         )
         mBubblePopMenu!!.setOnItemClickListener { view: View?, position: Int ->
@@ -187,9 +188,14 @@ open class LayoutHierarchyFloatyWindow(private val mRootNode: NodeInfo) : FullSc
                 1 -> {
                     showLayoutBounds()
                 }
-                else -> {
+                2 -> {
                     generateCode()
                 }
+
+                3 -> {
+                    copyNodeInfoToClipboard()
+                }
+
             }
         }
         mBubblePopMenu!!.width = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -208,6 +214,15 @@ open class LayoutHierarchyFloatyWindow(private val mRootNode: NodeInfo) : FullSc
         val window = LayoutBoundsFloatyWindow(mRootNode)
         window.setSelectedNode(mSelectedNode)
         FloatyService.addWindow(window)
+    }
+
+    private fun copyNodeInfoToClipboard() {
+        mSelectedNode?.let { node ->
+            val clipboard =
+                mContext?.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+            val clip = android.content.ClipData.newPlainText("Node Info", node.toString())
+            clipboard.setPrimaryClip(clip)
+        }
     }
 
     fun showNodeInfo() {

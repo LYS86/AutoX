@@ -12,12 +12,11 @@ import com.stardust.enhancedfloaty.FloatyService
 import com.stardust.view.accessibility.LayoutInspector
 import com.stardust.view.accessibility.LayoutInspector.CaptureAvailableListener
 import com.stardust.view.accessibility.NodeInfo
-import org.autojs.autoxjs.R
 import org.autojs.autojs.ui.codegeneration.CodeGenerateDialog
 import org.autojs.autojs.ui.floating.FloatyWindowManger
 import org.autojs.autojs.ui.floating.FullScreenFloatyWindow
 import org.autojs.autojs.ui.widget.BubblePopupMenu
-import java.util.*
+import org.autojs.autoxjs.R
 
 /**
  * Created by Stardust on 2017/3/12.
@@ -65,6 +64,13 @@ open class LayoutBoundsFloatyWindow(private val mRootNode: NodeInfo?) : FullScre
         mNodeInfoView!!.setNodeInfo(mSelectedNode!!)
         mNodeInfoDialog!!.show()
     }
+    private fun copyNodeInfoToClipboard() {
+        mSelectedNode?.let { node ->
+            val clipboard = mContext?.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+            val clip = android.content.ClipData.newPlainText("Node Info", node.toString())
+            clipboard.setPrimaryClip(clip)
+        }
+    }
 
     private fun ensureOperationPopMenu() {
         if (mBubblePopMenu != null) return
@@ -73,6 +79,7 @@ open class LayoutBoundsFloatyWindow(private val mRootNode: NodeInfo?) : FullScre
                 mContext!!.getString(R.string.text_show_widget_infomation),
                 mContext!!.getString(R.string.text_show_layout_hierarchy),
                 mContext!!.getString(R.string.text_generate_code),
+                mContext!!.getString(R.string.text_copy_widget_info),
                 mContext!!.getString(R.string.text_exit_floating_window)
             )
         )
@@ -89,6 +96,9 @@ open class LayoutBoundsFloatyWindow(private val mRootNode: NodeInfo?) : FullScre
                     generateCode()
                 }
                 3 -> {
+                    copyNodeInfoToClipboard()
+                }
+                4 -> {
                     close()
                 }
             }

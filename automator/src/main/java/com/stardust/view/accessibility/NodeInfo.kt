@@ -4,13 +4,9 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Rect
-import androidx.annotation.Keep
 import android.view.accessibility.AccessibilityNodeInfo
-
+import androidx.annotation.Keep
 import com.stardust.automator.UiObject
-
-import java.util.ArrayList
-import java.util.HashMap
 
 /**
  * Created by Stardust on 2017/3/10.
@@ -108,39 +104,7 @@ class NodeInfo(resources: Resources?, node: UiObject, var parent: NodeInfo?) {
     }
 
     override fun toString(): String {
-        return className + "{" +
-                "childCount=" + children.size +
-                ", mBoundsInScreen=" + boundsInScreen +
-                ", mBoundsInParent=" + boundsInParent +
-                ", id='" + id + '\''.toString() +
-                ", desc='" + desc + '\''.toString() +
-                ", packageName='" + packageName + '\''.toString() +
-                ", text='" + text + '\''.toString() +
-                ", depth=" + depth +
-                ", drawingOrder=" + drawingOrder +
-                ", accessibilityFocused=" + accessibilityFocused +
-                ", checked=" + checked +
-                ", clickable=" + clickable +
-                ", contextClickable=" + contextClickable +
-                ", dismissable=" + dismissable +
-                ", editable=" + editable +
-                ", enabled=" + enabled +
-                ", focusable=" + focusable +
-                ", longClickable=" + longClickable +
-                ", row=" + row +
-                ", column=" + column +
-                ", rowCount=" + rowCount +
-                ", columnCount=" + columnCount +
-                ", rowSpan=" + rowSpan +
-                ", columnSpan=" + columnSpan +
-                ", selected=" + selected +
-                ", scrollable=" + scrollable +
-                ", bounds='" + bounds + '\''.toString() +
-                ", checkable=" + checkable +
-                ", focused=" + focused +
-                ", visibleToUser=" + visibleToUser +
-                ", parent=" + parent?.className +
-                '}'.toString()
+        return "$className{childCount=${children.size}, mBoundsInScreen=$boundsInScreen, mBoundsInParent=$boundsInParent, id='$id', desc='$desc', packageName='$packageName', text='$text', depth=$depth, drawingOrder=$drawingOrder, accessibilityFocused=$accessibilityFocused, checked=$checked, clickable=$clickable, contextClickable=$contextClickable, dismissable=$dismissable, editable=$editable, enabled=$enabled, focusable=$focusable, longClickable=$longClickable, row=$row, column=$column, rowCount=$rowCount, columnCount=$columnCount, rowSpan=$rowSpan, columnSpan=$columnSpan, selected=$selected, scrollable=$scrollable, bounds='$bounds', checkable=$checkable, focused=$focused, visibleToUser=$visibleToUser, parent=${parent?.className}}"
     }
 
     companion object {
