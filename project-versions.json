@@ -3,7 +3,7 @@
   "appVersionName": "6.3.6",
   "devVersionCode": 635,
   "devVersionName": "6.3.5",
-  "target": 26,
+  "target": 29,
   "mini": 21,
   "compile": 32,
   "buildTool": "32.0.0",
